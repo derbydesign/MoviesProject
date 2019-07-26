@@ -1,6 +1,6 @@
 <?php
 
-// set serverIp/root for curl request
+// set serverIP/root for curl request
 if (!defined('SERVER_ROOT')) {
     define('SERVER_ROOT', 'http://localhost:8080');
 }

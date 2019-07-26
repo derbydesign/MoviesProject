@@ -2,27 +2,16 @@
 
 class ProductionCompany
 {
+    private $connection;
+    private $table_name = "production_companies";
+
+    // properties
     private $id;
     private $name;
 
-    public function getId()
+    public function __construct($connection)
     {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
+        $this->connection = $connection;
     }
 }
 

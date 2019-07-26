@@ -8,7 +8,7 @@ class Install
     {
         try {
             $db = new DB();
-            $connection = $db->getConnection();
+            $connection = $db->getConnection(false);
             $sql = file_get_contents("sql/db-create.sql", FILE_USE_INCLUDE_PATH);
             $connection->exec($sql);
             echo "<p>Database and tables created successfully!</p>";

@@ -28,6 +28,7 @@ if (isset($_GET['movie_id'])) {
                 'first_name' => $first_name,
                 'last_name' => $last_name,
                 'movie_revenue' => number_format($movie_revenue, 2, '.', ','),
+                'character_name' => $character_name,
                 'base_salary' => number_format($actor_base_salary, 2, '.', ','),
                 'revenue_percentage' => $revenue_share,
                 'revenue_share' => number_format(($movie_revenue * $revenue_share), 2, '.', ','),

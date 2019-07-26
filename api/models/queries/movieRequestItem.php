@@ -19,7 +19,7 @@ class MovieRequestItem
         $this->connection = $connection;
     }
 
-    function getAllDetailsByPcId($pc_id)
+    function getAllDetailsByPcId($pcId)
     {
         $query = "SELECT m.id as movie_id, m.title as movie_title, m.pc_id, m.revenue as movie_revenue, pc.name as pc_name
                   FROM $this->table_name m
@@ -30,7 +30,7 @@ class MovieRequestItem
 
         $stmt = $this->connection->prepare($query);
 
-        $stmt->bindParam(':id', $pc_id, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $pcId, PDO::PARAM_INT);
 
         $stmt->execute();
 

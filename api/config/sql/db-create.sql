@@ -33,6 +33,7 @@ CREATE TABLE `production_companies` (
 CREATE TABLE `movie_actors` (
 	`movie_id` int NOT NULL,
 	`actor_id` int NOT NULL,
+	`character_name` varchar(50) NOT NULL,
 	`actor_base_salary` DECIMAL(10,2) NOT NULL,
 	`actor_revenue_share` DECIMAL(3,2) NOT NULL,
 	PRIMARY KEY (`movie_id`,`actor_id`)

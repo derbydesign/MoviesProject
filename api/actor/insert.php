@@ -22,6 +22,7 @@ if (
     !empty($data->first_name) &&
     !empty($data->last_name) &&
     !empty($data->movie_id) &&
+    !empty($data->character_name) &&
     !empty($data->base_salary) &&
     !empty($data->revenue_share)
 ) {
@@ -32,6 +33,7 @@ if (
         $data_array = array(
             "movie_id" => $data->movie_id,
             "actor_id" => $db->lastInsertId(),
+            "character_name" => $data->character_name,
             "base_salary" => $data->base_salary,
             "revenue_share" => $data->revenue_share
         );

@@ -3,11 +3,13 @@
 include_once 'settings.php';
 $curl_request = new CurlRequest();
 
+// process add actor form if submitted
 if (isset($_POST['add_actor'])) {
     $data_array = array(
         "first_name" => $_POST['first_name'],
         "last_name" => $_POST['last_name'],
         "movie_id" => $_POST['movie_id'],
+        "character_name" => $_POST['character_name'],
         "base_salary" => $_POST['base_salary'],
         "revenue_share" => $_POST['revenue_share']
     );
@@ -65,6 +67,11 @@ if (isset($_POST['add_actor'])) {
                     </select>
                 </div>
                 <div class="form-group">
+                    <label for="add-character-name">Character Name</label>
+                    <input type="text" class="form-control" id="add-character-name" name="character_name"
+                           required/>
+                </div>
+                <div class="form-group">
                     <label for="add-base-salary">Base Salary</label>
                     <input type="number" min="0" step=".01" class="form-control" id="add-base-salary" name="base_salary"
                            required/>
@@ -83,6 +90,46 @@ if (isset($_POST['add_actor'])) {
                     </div>
                 </div>
             </form>
+        </div>
+        <div class="col-12 col-md-4 col-lg-6 col-xl-4 mb-5">
+            <div class="card pc">
+                <div class="card-body">
+                    <h5 class="card-title"><em>Friendly Fire</em></h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        Script Analysis
+                    </h6>
+                    <?php
+                    $get_movie_actors = $curl_request->callAPI('GET', SERVER_ROOT . '/MoviesProject/api/actor/getAllDetailsByMovieId.php?movie_id=33', false);
+                    $get_movie_actors_response = json_decode($get_movie_actors);
+
+                    foreach ($get_movie_actors_response->rows as $actor) {
+                        $total_lines = 0;
+                        $total_words = 0;
+                        $total_references = 0;
+
+                        $get_lines_details = $curl_request->callAPI('GET', SERVER_ROOT . '/MoviesProject/api/script/getLinesByCharacter.php?movie_id=33&actor_id=' . $actor->actor_id, false);
+                        $lines_details_response = json_decode($get_lines_details);
+
+                    foreach ($lines_details_response->rows as $response) {
+                        $total_lines = $response->total_lines;
+                        $total_words = $response->total_words;
+                        $total_references = $response->total_references;
+                    }
+                        ?>
+                        <p class="card-text">
+                            <?= htmlentities($actor->first_name) ?> <?= htmlentities($actor->last_name) ?>
+                            <small><em>(as <?= htmlentities($actor->character_name) ?>)</em></small>
+                        </p>
+                        <ul>
+                            <li>Total Character Lines: <?= $total_lines ?></li>
+                            <li>Total Character Words Spoken: <?= $total_words ?></li>
+                            <li>Total Character References: <?= $total_references ?></li>
+                        </ul>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -126,11 +173,15 @@ if (isset($_POST['add_actor'])) {
 
                                             foreach ($get_actors_response->rows as $actor) {
                                                 ?>
-                                                <p class="card-text"><?= htmlentities($actor->first_name) ?> <?= htmlentities($actor->last_name) ?></p>
+                                                <p class="card-text">
+                                                    <?= htmlentities($actor->first_name) ?> <?= htmlentities($actor->last_name) ?>
+                                                    <small><em>(as <?= htmlentities($actor->character_name) ?>)</em></small>
+                                                </p>
                                                 <ul>
                                                     <li>Base Salary: $<?= htmlentities($actor->base_salary) ?></li>
                                                     <li>Revenue Share
-                                                        (<?= number_format(htmlentities($actor->revenue_percentage) * 100, 0) ?>%):
+                                                        (<?= number_format(htmlentities($actor->revenue_percentage) * 100, 0) ?>
+                                                        %):
                                                         $<?= htmlentities($actor->revenue_share) ?></li>
                                                     <li>Total Earnings:
                                                         $<?= number_format((float)str_replace(',', '', htmlentities($actor->revenue_share)) + (float)str_replace(',', '', htmlentities($actor->base_salary)), 2, '.', ',') ?></li>

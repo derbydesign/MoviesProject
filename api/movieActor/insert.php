@@ -19,11 +19,13 @@ $data = json_decode(file_get_contents("php://input"));
 if (
     !empty($data->movie_id) &&
     !empty($data->actor_id) &&
+    !empty($data->character_name) &&
     !empty($data->base_salary) &&
     !empty($data->revenue_share)
 ) {
     $model->movie_id = $data->movie_id;
     $model->actor_id = $data->actor_id;
+    $model->character_name = $data->character_name;
     $model->base_salary = number_format($data->base_salary, '2', '.', '');
     $model->revenue_share = number_format($data->revenue_share / 100, 2, '.', '');
 

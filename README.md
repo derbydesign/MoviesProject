@@ -39,7 +39,7 @@ to match your local mysql database connection
 Create and Seed Database
 
 ```
-navigate to http://localhost:8080/MoviesProjects/install
+navigate to http://localhost:8080/MoviesProject/install
 (or whatever your server ip is)
 
 This should create the movies_project db on your mysql server.

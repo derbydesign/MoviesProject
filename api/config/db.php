@@ -3,7 +3,7 @@
 class DB
 {
     private $host = "localhost";
-    private $port = '3307';
+    private $port = '3306';
     private $username = "root";
     private $password = "root";
     private $database = "movies_project";

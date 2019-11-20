@@ -14,7 +14,9 @@ A simple web application demonstrating knowledge of building/using APIs to creat
 > 
 > **Part II:**
 > Assume a movie script starts of each speaking and/or moving event which we will call a “line” with a reference to an Actor > in the movie. The line can include more than one sentence and/or paragraphs. The line ends when a next reference to the same or different Actor’s speaking and/or moving event is made in the script.  Create a file that has a sample movie script for the Actors in your database based on this description.  Add to your webapp a display that also shows the following calculations against that file:
-> a) the number of script “lines” and the number of spoken words in each movie script for each Actor, and,  
+> 
+> a) the number of script “lines” and the number of spoken words in each movie script for each Actor, and,
+> 
 > b) the number of times the Actor's character will be mentioned in each movie script by other Actors (for instance, Actor plays "Mad Max", b) will be a count of how many times a reference to "Max" or "Mad Max" by another character is made in the movie script)
 
 
